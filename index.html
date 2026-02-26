@@ -1,29 +1,182 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Client Spaitra - Accès Banque</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Client Spaitra — Demande & Réclamation</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Background animation -->
+  <canvas id="bg"></canvas>
 
-    <header>
-        <h1>Client Spaitra</h1>
-        <p>Interface de réclamation client</p>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">AB</div>
+        <div class="brandText">
+          <div class="brandTitle">Client Spaitra</div>
+          <div class="brandSub">Interface de demande, rendez-vous & réclamation</div>
+        </div>
+      </div>
+      <div class="badge">Version Web • GitHub Pages</div>
     </header>
 
-    <main>
-        <div class="card">
-            <h2>Nouvelle réclamation</h2>
-            <form>
-                <input type="text" placeholder="Nom complet" required>
-                <input type="email" placeholder="Email" required>
-                <textarea placeholder="Décrivez votre réclamation" required></textarea>
-                <button type="submit">Envoyer</button>
-            </form>
+    <main class="grid">
+      <section class="card">
+        <h2>Identification</h2>
+
+        <div class="row">
+          <div class="field">
+            <label>Prénom *</label>
+            <input id="prenom" type="text" placeholder="Prénom" required />
+          </div>
+          <div class="field">
+            <label>Nom *</label>
+            <input id="nom" type="text" placeholder="Nom" required />
+          </div>
         </div>
+
+        <div class="row">
+          <div class="field">
+            <label>E-mail *</label>
+            <input id="email" type="email" placeholder="ex: nom@domaine.com" required />
+            <small class="hint" id="emailHint"></small>
+          </div>
+          <div class="field">
+            <label>Téléphone *</label>
+            <input id="tel" type="tel" placeholder="ex: +261 34 12 345 67" required />
+            <small class="hint" id="telHint"></small>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field full">
+            <label>Ma société (optionnel)</label>
+            <input id="societe" type="text" placeholder="Nom de la société" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field full">
+            <label>Agence la plus proche *</label>
+            <select id="agence" required>
+              <option value="" disabled selected>Choisir une agence</option>
+              <option>Akaky Banky Ambatolampy</option>
+              <option>Akaky Banky Analakely</option>
+              <option>Akaky Banky Anosiala</option>
+              <option>Akaky Banky Antsirabe</option>
+              <option>Akaky Banky Manjakandriana</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Type de demande</h2>
+
+        <div class="row">
+          <div class="field full">
+            <label>Catégorie *</label>
+            <select id="categorie" required>
+              <option value="" disabled selected>Sélectionner</option>
+              <option value="rdv">Demande de rendez-vous</option>
+              <option value="reclamation">Réclamation</option>
+              <option value="info">Demande d’information</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- RDV -->
+        <div id="blocRDV" class="subcard hidden">
+          <div class="subTitle">Demande de rendez-vous</div>
+          <div class="row">
+            <div class="field">
+              <label>Choix 1 *</label>
+              <input id="rdv1" type="date" />
+            </div>
+            <div class="field">
+              <label>Choix 2 (optionnel)</label>
+              <input id="rdv2" type="date" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="field full">
+              <label>Motif RDV *</label>
+              <select id="motifRdv">
+                <option value="" disabled selected>Sélectionner</option>
+                <option>Ouverture de compte</option>
+                <option>Crédit</option>
+                <option>Carte / TPE</option>
+                <option>Réclamation suivi</option>
+                <option>Autre</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Réclamation -->
+        <div id="blocRec" class="subcard hidden">
+          <div class="subTitle">Réclamation</div>
+          <div class="row">
+            <div class="field full">
+              <label>Produit concerné *</label>
+              <select id="produit">
+                <option value="" disabled selected>Sélectionner</option>
+                <option>Compte</option>
+                <option>Carte</option>
+                <option>Crédit</option>
+                <option>Mobile Banking</option>
+                <option>Autre</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label>N° Compte / Référence (optionnel)</label>
+              <input id="ref" type="text" placeholder="Ex: 001-XXXXXX" />
+            </div>
+            <div class="field">
+              <label>Urgence *</label>
+              <select id="urgence">
+                <option value="" disabled selected>Sélectionner</option>
+                <option value="basse">Basse</option>
+                <option value="moyenne">Moyenne</option>
+                <option value="haute">Haute</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field full">
+            <label>Message *</label>
+            <textarea id="message" rows="6" maxlength="800" placeholder="Décrivez votre demande (max 800 caractères)"></textarea>
+            <div class="meta">
+              <span id="count">0/800</span>
+              <span id="status" class="pill">En attente</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row actions">
+          <label class="check">
+            <input id="human" type="checkbox" />
+            <span>Je confirme que je suis humain</span>
+          </label>
+          <button id="send" type="button" disabled>Envoyer</button>
+        </div>
+
+        <div id="toast" class="toast hidden"></div>
+      </section>
     </main>
 
+    <footer class="foot">
+      © Accès Banque — Client Spaitra • Version démo (statique)
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
