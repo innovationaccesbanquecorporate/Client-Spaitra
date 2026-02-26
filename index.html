@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Background animation -->
+
+  <!-- Fond animé clair (particules très légères) -->
   <canvas id="bg"></canvas>
 
   <div class="shell">
@@ -16,102 +17,106 @@
         <div class="logo">AB</div>
         <div class="brandText">
           <div class="brandTitle">Client Spaitra</div>
-          <div class="brandSub">Interface de demande, rendez-vous & réclamation</div>
+          <div class="brandSub">Demande de rendez-vous • Réclamation • Informations</div>
         </div>
       </div>
-      <div class="badge">Version Web • GitHub Pages</div>
+
+      <nav class="nav">
+        <a href="#" class="navLink">Qui sommes-nous ?</a>
+        <a href="#" class="navLink">Offres & services</a>
+        <a href="#" class="navLink">FAQ</a>
+        <a href="#" class="navLink">Contact</a>
+        <a href="#" class="navBtn">Mes comptes</a>
+      </nav>
     </header>
 
-    <main class="grid">
+    <main class="main">
       <section class="card">
-        <h2>Identification</h2>
+        <h2>Vos informations</h2>
+        <p class="desc">Merci de renseigner les informations suivantes.</p>
 
-        <div class="row">
-          <div class="field">
-            <label>Prénom *</label>
-            <input id="prenom" type="text" placeholder="Prénom" required />
+        <div class="grid2">
+          <div class="f">
+            <input id="prenom" type="text" placeholder=" " required />
+            <label for="prenom">Prénom *</label>
           </div>
-          <div class="field">
-            <label>Nom *</label>
-            <input id="nom" type="text" placeholder="Nom" required />
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="field">
-            <label>E-mail *</label>
-            <input id="email" type="email" placeholder="ex: nom@domaine.com" required />
+          <div class="f">
+            <input id="nom" type="text" placeholder=" " required />
+            <label for="nom">Nom *</label>
+          </div>
+
+          <div class="f">
+            <input id="email" type="email" placeholder=" " required />
+            <label for="email">E-mail *</label>
             <small class="hint" id="emailHint"></small>
           </div>
-          <div class="field">
-            <label>Téléphone *</label>
-            <input id="tel" type="tel" placeholder="ex: +261 34 12 345 67" required />
+
+          <div class="f">
+            <input id="tel" type="tel" placeholder=" " required />
+            <label for="tel">Téléphone *</label>
             <small class="hint" id="telHint"></small>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="field full">
-            <label>Ma société (optionnel)</label>
-            <input id="societe" type="text" placeholder="Nom de la société" />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="field full">
-            <label>Agence la plus proche *</label>
-            <select id="agence" required>
-              <option value="" disabled selected>Choisir une agence</option>
-              <option>Akaky Banky Ambatolampy</option>
-              <option>Akaky Banky Analakely</option>
-              <option>Akaky Banky Anosiala</option>
-              <option>Akaky Banky Antsirabe</option>
-              <option>Akaky Banky Manjakandriana</option>
-            </select>
+          <div class="f full">
+            <input id="societe" type="text" placeholder=" " />
+            <label for="societe">Ma société (optionnel)</label>
           </div>
         </div>
       </section>
 
       <section class="card">
-        <h2>Type de demande</h2>
+        <h2>Votre demande</h2>
 
         <div class="row">
           <div class="field full">
-            <label>Catégorie *</label>
-            <select id="categorie" required>
-              <option value="" disabled selected>Sélectionner</option>
-              <option value="rdv">Demande de rendez-vous</option>
-              <option value="reclamation">Réclamation</option>
-              <option value="info">Demande d’information</option>
-              <option value="autre">Autre</option>
-            </select>
+            <label class="plainLabel">Je souhaite *</label>
+            <div class="radioRow">
+              <label class="radio">
+                <input type="radio" name="type" value="rdv" />
+                <span>Prendre rendez-vous</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="type" value="reclamation" />
+                <span>Faire une réclamation</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="type" value="info" />
+                <span>Demander une information</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="type" value="autre" />
+                <span>Autre</span>
+              </label>
+            </div>
           </div>
         </div>
 
         <!-- RDV -->
         <div id="blocRDV" class="subcard hidden">
           <div class="subTitle">Demande de rendez-vous</div>
-          <div class="row">
-            <div class="field">
-              <label>Choix 1 *</label>
-              <input id="rdv1" type="date" />
+
+          <div class="grid2">
+            <div class="f">
+              <input id="rdv1" type="date" placeholder=" " />
+              <label for="rdv1">Choix 1 *</label>
             </div>
-            <div class="field">
-              <label>Choix 2 (optionnel)</label>
-              <input id="rdv2" type="date" />
+
+            <div class="f">
+              <input id="rdv2" type="date" placeholder=" " />
+              <label for="rdv2">Choix 2 (optionnel)</label>
             </div>
-          </div>
-          <div class="row">
-            <div class="field full">
-              <label>Motif RDV *</label>
+
+            <div class="f full">
               <select id="motifRdv">
-                <option value="" disabled selected>Sélectionner</option>
+                <option value="" disabled selected>Choisir un motif</option>
                 <option>Ouverture de compte</option>
                 <option>Crédit</option>
                 <option>Carte / TPE</option>
-                <option>Réclamation suivi</option>
+                <option>Assistance digitale</option>
                 <option>Autre</option>
               </select>
+              <label class="selectLabel">Motif RDV *</label>
             </div>
           </div>
         </div>
@@ -119,40 +124,42 @@
         <!-- Réclamation -->
         <div id="blocRec" class="subcard hidden">
           <div class="subTitle">Réclamation</div>
-          <div class="row">
-            <div class="field full">
-              <label>Produit concerné *</label>
+
+          <div class="grid2">
+            <div class="f full">
               <select id="produit">
-                <option value="" disabled selected>Sélectionner</option>
+                <option value="" disabled selected>Produit concerné</option>
                 <option>Compte</option>
                 <option>Carte</option>
                 <option>Crédit</option>
                 <option>Mobile Banking</option>
                 <option>Autre</option>
               </select>
+              <label class="selectLabel">Produit concerné *</label>
             </div>
-          </div>
-          <div class="row">
-            <div class="field">
-              <label>N° Compte / Référence (optionnel)</label>
-              <input id="ref" type="text" placeholder="Ex: 001-XXXXXX" />
+
+            <div class="f">
+              <input id="ref" type="text" placeholder=" " />
+              <label for="ref">N° compte / Référence (optionnel)</label>
             </div>
-            <div class="field">
-              <label>Urgence *</label>
+
+            <div class="f">
               <select id="urgence">
-                <option value="" disabled selected>Sélectionner</option>
+                <option value="" disabled selected>Urgence</option>
                 <option value="basse">Basse</option>
                 <option value="moyenne">Moyenne</option>
                 <option value="haute">Haute</option>
               </select>
+              <label class="selectLabel">Niveau d’urgence *</label>
             </div>
           </div>
         </div>
 
+        <!-- Message -->
         <div class="row">
           <div class="field full">
-            <label>Message *</label>
-            <textarea id="message" rows="6" maxlength="800" placeholder="Décrivez votre demande (max 800 caractères)"></textarea>
+            <label class="plainLabel">Message *</label>
+            <textarea id="message" rows="6" maxlength="800" placeholder="Décrivez votre demande (min. 10 caractères, max. 800)."></textarea>
             <div class="meta">
               <span id="count">0/800</span>
               <span id="status" class="pill">En attente</span>
@@ -173,7 +180,7 @@
     </main>
 
     <footer class="foot">
-      © Accès Banque — Client Spaitra • Version démo (statique)
+      © Accès Banque — Client Spaitra • Démo (statique)
     </footer>
   </div>
 
