@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <!-- Fond animé clair (particules très légères) -->
+  <!-- Fond animé -->
   <canvas id="bg"></canvas>
 
   <div class="shell">
@@ -31,6 +31,7 @@
     </header>
 
     <main class="main">
+      <!-- IDENTITÉ -->
       <section class="card">
         <h2>Vos informations</h2>
         <p class="desc">Merci de renseigner les informations suivantes.</p>
@@ -65,25 +66,30 @@
         </div>
       </section>
 
+      <!-- DEMANDE -->
       <section class="card">
         <h2>Votre demande</h2>
 
         <div class="row">
           <div class="field full">
             <label class="plainLabel">Je souhaite *</label>
+
             <div class="radioRow">
               <label class="radio">
                 <input type="radio" name="type" value="rdv" />
                 <span>Prendre rendez-vous</span>
               </label>
+
               <label class="radio">
                 <input type="radio" name="type" value="reclamation" />
                 <span>Faire une réclamation</span>
               </label>
+
               <label class="radio">
                 <input type="radio" name="type" value="info" />
                 <span>Demander une information</span>
               </label>
+
               <label class="radio">
                 <input type="radio" name="type" value="autre" />
                 <span>Autre</span>
@@ -121,7 +127,7 @@
           </div>
         </div>
 
-        <!-- Réclamation -->
+        <!-- RÉCLAMATION -->
         <div id="blocRec" class="subcard hidden">
           <div class="subTitle">Réclamation</div>
 
@@ -155,11 +161,13 @@
           </div>
         </div>
 
-        <!-- Message -->
+        <!-- MESSAGE -->
         <div class="row">
           <div class="field full">
             <label class="plainLabel">Message *</label>
-            <textarea id="message" rows="6" maxlength="800" placeholder="Décrivez votre demande (min. 10 caractères, max. 800)."></textarea>
+            <textarea id="message" rows="6" maxlength="800"
+              placeholder="Décrivez votre demande (min. 10 caractères, max. 800)."></textarea>
+
             <div class="meta">
               <span id="count">0/800</span>
               <span id="status" class="pill">En attente</span>
@@ -172,6 +180,7 @@
             <input id="human" type="checkbox" />
             <span>Je confirme que je suis humain</span>
           </label>
+
           <button id="send" type="button" disabled>Envoyer</button>
         </div>
 
