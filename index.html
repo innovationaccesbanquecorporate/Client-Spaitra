@@ -8,17 +8,14 @@
 </head>
 <body>
 
-  <!-- Fond animé -->
   <canvas id="bg"></canvas>
 
   <div class="shell">
     <header class="topbar">
       <div class="brand">
-        <!-- LOGO -->
         <div class="logoWrap">
           <img src="logo.png" alt="Logo Banque" class="logoImg" />
         </div>
-
         <div class="brandText">
           <div class="brandTitle">Client Spaitra</div>
           <div class="brandSub">Demande de rendez-vous • Réclamation • Informations</div>
@@ -34,161 +31,165 @@
       </nav>
     </header>
 
-    <main class="main">
-      <!-- IDENTITÉ -->
-      <section class="card">
-        <h2>Vos informations</h2>
-        <p class="desc">Merci de renseigner les informations suivantes.</p>
+    <!-- UNE SEULE CARTE -->
+    <main class="single">
+      <section class="cardWide">
+        <div class="wideGrid">
+          <!-- COLONNE GAUCHE : INFOS -->
+          <div class="col">
+            <h2>Vos informations</h2>
+            <p class="desc">Merci de renseigner les informations suivantes.</p>
 
-        <div class="grid2">
-          <div class="f">
-            <input id="prenom" type="text" placeholder=" " required />
-            <label for="prenom">Prénom *</label>
+            <div class="grid2">
+              <div class="f">
+                <input id="prenom" type="text" placeholder=" " required />
+                <label for="prenom">Prénom *</label>
+              </div>
+
+              <div class="f">
+                <input id="nom" type="text" placeholder=" " required />
+                <label for="nom">Nom *</label>
+              </div>
+
+              <div class="f">
+                <input id="email" type="email" placeholder=" " required />
+                <label for="email">E-mail *</label>
+                <small class="hint" id="emailHint"></small>
+              </div>
+
+              <div class="f">
+                <input id="tel" type="tel" placeholder=" " required />
+                <label for="tel">Téléphone *</label>
+                <small class="hint" id="telHint"></small>
+              </div>
+
+              <div class="f full">
+                <input id="societe" type="text" placeholder=" " />
+                <label for="societe">Ma société (optionnel)</label>
+              </div>
+            </div>
           </div>
 
-          <div class="f">
-            <input id="nom" type="text" placeholder=" " required />
-            <label for="nom">Nom *</label>
-          </div>
+          <!-- COLONNE DROITE : DEMANDE -->
+          <div class="col">
+            <h2>Votre demande</h2>
 
-          <div class="f">
-            <input id="email" type="email" placeholder=" " required />
-            <label for="email">E-mail *</label>
-            <small class="hint" id="emailHint"></small>
-          </div>
+            <div class="row">
+              <div class="field full">
+                <label class="plainLabel">Je souhaite *</label>
+                <div class="radioRow">
+                  <label class="radio">
+                    <input type="radio" name="type" value="rdv" />
+                    <span>Prendre rendez-vous</span>
+                  </label>
 
-          <div class="f">
-            <input id="tel" type="tel" placeholder=" " required />
-            <label for="tel">Téléphone *</label>
-            <small class="hint" id="telHint"></small>
-          </div>
+                  <label class="radio">
+                    <input type="radio" name="type" value="reclamation" />
+                    <span>Faire une réclamation</span>
+                  </label>
 
-          <div class="f full">
-            <input id="societe" type="text" placeholder=" " />
-            <label for="societe">Ma société (optionnel)</label>
-          </div>
-        </div>
-      </section>
+                  <label class="radio">
+                    <input type="radio" name="type" value="info" />
+                    <span>Demander une information</span>
+                  </label>
 
-      <!-- DEMANDE -->
-      <section class="card">
-        <h2>Votre demande</h2>
+                  <label class="radio">
+                    <input type="radio" name="type" value="autre" />
+                    <span>Autre</span>
+                  </label>
+                </div>
+              </div>
+            </div>
 
-        <div class="row">
-          <div class="field full">
-            <label class="plainLabel">Je souhaite *</label>
+            <!-- RDV -->
+            <div id="blocRDV" class="subcard hidden">
+              <div class="subTitle">Demande de rendez-vous</div>
 
-            <div class="radioRow">
-              <label class="radio">
-                <input type="radio" name="type" value="rdv" />
-                <span>Prendre rendez-vous</span>
+              <div class="grid2">
+                <div class="f">
+                  <input id="rdv1" type="date" placeholder=" " />
+                  <label for="rdv1">Choix 1 *</label>
+                </div>
+
+                <div class="f">
+                  <input id="rdv2" type="date" placeholder=" " />
+                  <label for="rdv2">Choix 2 (optionnel)</label>
+                </div>
+
+                <div class="f full">
+                  <select id="motifRdv">
+                    <option value="" disabled selected>Choisir un motif</option>
+                    <option>Ouverture de compte</option>
+                    <option>Crédit</option>
+                    <option>Carte / TPE</option>
+                    <option>Assistance digitale</option>
+                    <option>Autre</option>
+                  </select>
+                  <label class="selectLabel">Motif RDV *</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- RÉCLAMATION -->
+            <div id="blocRec" class="subcard hidden">
+              <div class="subTitle">Réclamation</div>
+
+              <div class="grid2">
+                <div class="f full">
+                  <select id="produit">
+                    <option value="" disabled selected>Produit concerné</option>
+                    <option>Compte</option>
+                    <option>Carte</option>
+                    <option>Crédit</option>
+                    <option>Mobile Banking</option>
+                    <option>Autre</option>
+                  </select>
+                  <label class="selectLabel">Produit concerné *</label>
+                </div>
+
+                <div class="f">
+                  <input id="ref" type="text" placeholder=" " />
+                  <label for="ref">N° compte / Référence (optionnel)</label>
+                </div>
+
+                <div class="f">
+                  <select id="urgence">
+                    <option value="" disabled selected>Urgence</option>
+                    <option value="basse">Basse</option>
+                    <option value="moyenne">Moyenne</option>
+                    <option value="haute">Haute</option>
+                  </select>
+                  <label class="selectLabel">Niveau d’urgence *</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- MESSAGE -->
+            <div class="row">
+              <div class="field full">
+                <label class="plainLabel">Message *</label>
+                <textarea id="message" rows="6" maxlength="800"
+                  placeholder="Décrivez votre demande (min. 10 caractères, max. 800)."></textarea>
+
+                <div class="meta">
+                  <span id="count">0/800</span>
+                  <span id="status" class="pill">En attente</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row actions">
+              <label class="check">
+                <input id="human" type="checkbox" />
+                <span>Je confirme que je suis humain</span>
               </label>
 
-              <label class="radio">
-                <input type="radio" name="type" value="reclamation" />
-                <span>Faire une réclamation</span>
-              </label>
-
-              <label class="radio">
-                <input type="radio" name="type" value="info" />
-                <span>Demander une information</span>
-              </label>
-
-              <label class="radio">
-                <input type="radio" name="type" value="autre" />
-                <span>Autre</span>
-              </label>
+              <button id="send" type="button" disabled>Envoyer</button>
             </div>
+
+            <div id="toast" class="toast hidden"></div>
           </div>
         </div>
-
-        <!-- RDV -->
-        <div id="blocRDV" class="subcard hidden">
-          <div class="subTitle">Demande de rendez-vous</div>
-
-          <div class="grid2">
-            <div class="f">
-              <input id="rdv1" type="date" placeholder=" " />
-              <label for="rdv1">Choix 1 *</label>
-            </div>
-
-            <div class="f">
-              <input id="rdv2" type="date" placeholder=" " />
-              <label for="rdv2">Choix 2 (optionnel)</label>
-            </div>
-
-            <div class="f full">
-              <select id="motifRdv">
-                <option value="" disabled selected>Choisir un motif</option>
-                <option>Ouverture de compte</option>
-                <option>Crédit</option>
-                <option>Carte / TPE</option>
-                <option>Assistance digitale</option>
-                <option>Autre</option>
-              </select>
-              <label class="selectLabel">Motif RDV *</label>
-            </div>
-          </div>
-        </div>
-
-        <!-- RÉCLAMATION -->
-        <div id="blocRec" class="subcard hidden">
-          <div class="subTitle">Réclamation</div>
-
-          <div class="grid2">
-            <div class="f full">
-              <select id="produit">
-                <option value="" disabled selected>Produit concerné</option>
-                <option>Compte</option>
-                <option>Carte</option>
-                <option>Crédit</option>
-                <option>Mobile Banking</option>
-                <option>Autre</option>
-              </select>
-              <label class="selectLabel">Produit concerné *</label>
-            </div>
-
-            <div class="f">
-              <input id="ref" type="text" placeholder=" " />
-              <label for="ref">N° compte / Référence (optionnel)</label>
-            </div>
-
-            <div class="f">
-              <select id="urgence">
-                <option value="" disabled selected>Urgence</option>
-                <option value="basse">Basse</option>
-                <option value="moyenne">Moyenne</option>
-                <option value="haute">Haute</option>
-              </select>
-              <label class="selectLabel">Niveau d’urgence *</label>
-            </div>
-          </div>
-        </div>
-
-        <!-- MESSAGE -->
-        <div class="row">
-          <div class="field full">
-            <label class="plainLabel">Message *</label>
-            <textarea id="message" rows="6" maxlength="800"
-              placeholder="Décrivez votre demande (min. 10 caractères, max. 800)."></textarea>
-
-            <div class="meta">
-              <span id="count">0/800</span>
-              <span id="status" class="pill">En attente</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="row actions">
-          <label class="check">
-            <input id="human" type="checkbox" />
-            <span>Je confirme que je suis humain</span>
-          </label>
-
-          <button id="send" type="button" disabled>Envoyer</button>
-        </div>
-
-        <div id="toast" class="toast hidden"></div>
       </section>
     </main>
 
