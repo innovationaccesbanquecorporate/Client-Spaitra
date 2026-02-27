@@ -60,15 +60,28 @@ body{
 }
 
 .brand{display:flex; gap:12px; align-items:center}
-.logo{
-  width:44px; height:44px;
-  display:grid; place-items:center;
-  border-radius:12px;
-  background: linear-gradient(135deg, var(--blue), var(--sky));
-  color:white;
-  font-weight:800;
+
+/* LOGO */
+.logoWrap{
+  width:52px;
+  height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:14px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
   box-shadow: var(--shadow);
+  overflow:hidden;
 }
+.logoImg{
+  max-width:85%;
+  max-height:85%;
+  object-fit:contain;
+  /* Si ton logo est sombre, enlève le filter */
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+}
+
 .brandTitle{font-weight:800}
 .brandSub{font-size:13px; color:var(--muted)}
 
@@ -147,9 +160,7 @@ input, select, textarea{
   transition: all .2s ease;
   color: var(--text);
 }
-
 input::placeholder, textarea::placeholder{color: rgba(255,255,255,0.55)}
-
 input:focus, select:focus, textarea:focus{
   border-color: rgba(96,165,250,0.7);
   box-shadow:0 0 0 3px rgba(96,165,250,0.18);
@@ -301,7 +312,6 @@ button:disabled{
 }
 .toast.ok{border-color: rgba(187,247,208,0.35); background: rgba(187,247,208,0.08)}
 .toast.err{border-color: rgba(254,202,202,0.35); background: rgba(254,202,202,0.08)}
-.hidden{display:none !important}
 
 .foot{
   margin-top:14px;
