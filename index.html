@@ -3,101 +3,257 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Client Spaitra — Demande & Réclamation</title>
+  <title>Accès Banque — Service Client Premium</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
   <canvas id="bg"></canvas>
 
   <div class="shell">
-
     <header class="topbar">
       <div class="brand">
-        <!-- LOGO SANS CADRE -->
-        <img src="logo.png" alt="Logo Banque" class="logoImg" />
-
+        <img src="logo.png" alt="Accès Banque" class="logoImg" />
         <div class="brandText">
-          <div class="brandTitle">Client Spaitra</div>
-          <div class="brandSub">Demande de rendez-vous • Réclamation • Informations</div>
+          <div class="brandTitle">Service Client Premium</div>
+          <div class="brandSub">Rendez-vous • Réclamation • Informations</div>
         </div>
       </div>
+
+      <nav class="nav">
+        <a class="navLink" href="#">Qui sommes-nous ?</a>
+        <a class="navLink" href="#">Offres & services</a>
+        <a class="navLink" href="#">FAQ</a>
+        <a class="navLink" href="#">Contact</a>
+        <a class="navBtn" href="#">Mes comptes</a>
+      </nav>
     </header>
 
-    <main class="mainVertical">
-      <section class="cardVertical">
-
-        <h2>Vos informations</h2>
-
-        <div class="grid2">
-          <div class="f">
-            <input id="prenom" type="text" placeholder=" " required />
-            <label>Prénom *</label>
+    <main class="wrap">
+      <section class="card" aria-label="Formulaire Service Client Premium">
+        <div class="cardHead">
+          <div>
+            <div class="eyebrow">Accès Banque Madagascar</div>
+            <h1>Contact Premium</h1>
+            <p class="lead">Un traitement prioritaire de votre demande, avec un parcours simple et sécurisé.</p>
           </div>
 
-          <div class="f">
-            <input id="nom" type="text" placeholder=" " required />
-            <label>Nom *</label>
-          </div>
-
-          <div class="f">
-            <input id="email" type="email" placeholder=" " required />
-            <label>E-mail *</label>
-            <small id="emailHint" class="hint"></small>
-          </div>
-
-          <div class="f">
-            <input id="tel" type="tel" placeholder=" " required />
-            <label>Téléphone *</label>
-            <small id="telHint" class="hint"></small>
-          </div>
-
-          <div class="f full">
-            <input id="societe" type="text" placeholder=" " />
-            <label>Ma société (optionnel)</label>
+          <div class="trust">
+            <div class="trustItem">
+              <span class="dot ok"></span>
+              <span>Données protégées</span>
+            </div>
+            <div class="trustItem">
+              <span class="dot"></span>
+              <span>Réponse sous 24–48h</span>
+            </div>
           </div>
         </div>
 
-        <h2 class="sectionTitle">Votre demande</h2>
-
-        <div class="radioRow">
-          <label class="radio">
-            <input type="radio" name="type" value="rdv" />
-            <span>Prendre rendez-vous</span>
-          </label>
-
-          <label class="radio">
-            <input type="radio" name="type" value="reclamation" />
-            <span>Faire une réclamation</span>
-          </label>
-
-          <label class="radio">
-            <input type="radio" name="type" value="info" />
-            <span>Demander une information</span>
-          </label>
+        <!-- STEPPER -->
+        <div class="stepper" role="progressbar" aria-valuemin="1" aria-valuemax="3" aria-valuenow="1">
+          <div class="step active" data-step="1">
+            <div class="bubble">1</div>
+            <div class="label">Informations</div>
+          </div>
+          <div class="bar"></div>
+          <div class="step" data-step="2">
+            <div class="bubble">2</div>
+            <div class="label">Demande</div>
+          </div>
+          <div class="bar"></div>
+          <div class="step" data-step="3">
+            <div class="bubble">3</div>
+            <div class="label">Confirmation</div>
+          </div>
         </div>
 
-        <textarea id="message" rows="6"
-          placeholder="Décrivez votre demande (min. 10 caractères)."></textarea>
+        <!-- STEP 1 -->
+        <div class="panel" data-panel="1">
+          <h2>Vos informations</h2>
+          <p class="desc">Merci de renseigner les informations suivantes.</p>
 
-        <div class="actions">
-          <label class="check">
-            <input id="human" type="checkbox" />
-            <span>Je confirme que je suis humain</span>
-          </label>
+          <div class="grid2">
+            <div class="f">
+              <input id="prenom" type="text" placeholder=" " required />
+              <label for="prenom">Prénom *</label>
+            </div>
 
-          <button id="send" disabled>Envoyer</button>
+            <div class="f">
+              <input id="nom" type="text" placeholder=" " required />
+              <label for="nom">Nom *</label>
+            </div>
+
+            <div class="f">
+              <input id="email" type="email" placeholder=" " required />
+              <label for="email">E-mail *</label>
+              <small class="hint" id="emailHint"></small>
+            </div>
+
+            <div class="f">
+              <input id="tel" type="tel" placeholder=" " required />
+              <label for="tel">Téléphone *</label>
+              <small class="hint" id="telHint"></small>
+            </div>
+
+            <div class="f full">
+              <input id="societe" type="text" placeholder=" " />
+              <label for="societe">Ma société (optionnel)</label>
+            </div>
+          </div>
+
+          <div class="navActions">
+            <div class="leftNote">* Champs obligatoires</div>
+            <button id="next1" class="btnPrimary" type="button">Continuer</button>
+          </div>
         </div>
 
-        <div id="toast" class="toast hidden"></div>
+        <!-- STEP 2 -->
+        <div class="panel hidden" data-panel="2">
+          <h2>Votre demande</h2>
+          <p class="desc">Sélectionnez le type de demande puis décrivez votre besoin.</p>
 
+          <div class="block">
+            <div class="plainLabel">Je souhaite *</div>
+
+            <div class="radioGrid">
+              <label class="radioCard">
+                <input type="radio" name="type" value="rdv" />
+                <div class="rcTitle">Rendez-vous</div>
+                <div class="rcDesc">Prendre un rendez-vous avec un conseiller.</div>
+              </label>
+
+              <label class="radioCard">
+                <input type="radio" name="type" value="reclamation" />
+                <div class="rcTitle">Réclamation</div>
+                <div class="rcDesc">Signaler un incident / un mécontentement.</div>
+              </label>
+
+              <label class="radioCard">
+                <input type="radio" name="type" value="info" />
+                <div class="rcTitle">Information</div>
+                <div class="rcDesc">Demander un renseignement.</div>
+              </label>
+
+              <label class="radioCard">
+                <input type="radio" name="type" value="autre" />
+                <div class="rcTitle">Autre</div>
+                <div class="rcDesc">Une demande spécifique.</div>
+              </label>
+            </div>
+          </div>
+
+          <!-- RDV -->
+          <div id="blocRDV" class="subcard hidden">
+            <div class="subTitle">Demande de rendez-vous</div>
+
+            <div class="grid2">
+              <div class="f">
+                <input id="rdv1" type="date" placeholder=" " />
+                <label for="rdv1">Choix 1 *</label>
+              </div>
+
+              <div class="f">
+                <input id="rdv2" type="date" placeholder=" " />
+                <label for="rdv2">Choix 2 (optionnel)</label>
+              </div>
+
+              <div class="f full">
+                <select id="motifRdv">
+                  <option value="" disabled selected>Choisir un motif</option>
+                  <option>Ouverture de compte</option>
+                  <option>Crédit</option>
+                  <option>Carte / TPE</option>
+                  <option>Assistance digitale</option>
+                  <option>Autre</option>
+                </select>
+                <label class="selectLabel">Motif RDV *</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Réclamation -->
+          <div id="blocRec" class="subcard hidden">
+            <div class="subTitle">Réclamation</div>
+
+            <div class="grid2">
+              <div class="f full">
+                <select id="produit">
+                  <option value="" disabled selected>Produit concerné</option>
+                  <option>Compte</option>
+                  <option>Carte</option>
+                  <option>Crédit</option>
+                  <option>Mobile Banking</option>
+                  <option>Autre</option>
+                </select>
+                <label class="selectLabel">Produit concerné *</label>
+              </div>
+
+              <div class="f">
+                <input id="ref" type="text" placeholder=" " />
+                <label for="ref">N° compte / Référence (optionnel)</label>
+              </div>
+
+              <div class="f">
+                <select id="urgence">
+                  <option value="" disabled selected>Urgence</option>
+                  <option value="basse">Basse</option>
+                  <option value="moyenne">Moyenne</option>
+                  <option value="haute">Haute</option>
+                </select>
+                <label class="selectLabel">Niveau d’urgence *</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <div class="plainLabel">Message *</div>
+            <textarea id="message" rows="6" maxlength="800"
+              placeholder="Décrivez votre demande (min. 10 caractères, max. 800)."></textarea>
+
+            <div class="meta">
+              <span id="count">0/800</span>
+              <span id="status" class="pill">En attente</span>
+            </div>
+          </div>
+
+          <div class="navActions">
+            <button id="back2" class="btnGhost" type="button">Retour</button>
+            <button id="next2" class="btnPrimary" type="button" disabled>Continuer</button>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="panel hidden" data-panel="3">
+          <h2>Confirmation</h2>
+          <p class="desc">Vérifiez les informations avant d’envoyer.</p>
+
+          <div class="summary">
+            <div class="sumRow"><span>Nom</span><strong id="sumNom">—</strong></div>
+            <div class="sumRow"><span>Contact</span><strong id="sumContact">—</strong></div>
+            <div class="sumRow"><span>Type de demande</span><strong id="sumType">—</strong></div>
+            <div class="sumRow"><span>Détails</span><strong id="sumDetails">—</strong></div>
+          </div>
+
+          <div class="confirmRow">
+            <label class="check">
+              <input id="human" type="checkbox" />
+              <span>Je confirme que je suis humain</span>
+            </label>
+
+            <button id="send" class="btnPrimary" type="button" disabled>Envoyer</button>
+          </div>
+
+          <div class="navActions">
+            <button id="back3" class="btnGhost" type="button">Retour</button>
+            <div class="rightNote">En envoyant, vous acceptez le traitement de votre demande.</div>
+          </div>
+
+          <div id="toast" class="toast hidden"></div>
+        </div>
       </section>
     </main>
 
-    <footer class="foot">
-      © Accès Banque — Client Spaitra
-    </footer>
-
+    <footer class="foot">© Accès Banque — Service Client Premium</footer>
   </div>
 
   <script src="app.js"></script>
