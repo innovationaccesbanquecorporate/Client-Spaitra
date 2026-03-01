@@ -1,5 +1,7 @@
 // Helpers
 const $ = (id) => document.getElementById(id);
+const WORKER_URL = "https://reclamations-tickets.innovationaccesbanquedigilab.workers.dev/public/create-ticket"; // URL du Worker 
+const FORM_KEY = "ABM_FORM_2026_SECURE_9xP2"; // identique au secret PUBLIC_FORM_KEY
 
 function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); }
 
@@ -194,9 +196,78 @@ function validateStep3(){
 validateStep3();
 
 // ---- Submit (démo statique) ----
-$("send").addEventListener("click", ()=>{
+function mapUrgenceToPrio(urgenceValue){
+  if (urgenceValue === "haute") return "P1";
+  if (urgenceValue === "moyenne") return "P2";
+  return "P3";
+}
+
+$("send").addEventListener("click", async () => {
   if(!$("human").checked) return;
-  toast("ok", "Demande prête. Étape suivante : connecter une base (Google Sheets / Supabase) pour enregistrer et générer un numéro de ticket premium.");
+
+  const type = getType();
+
+  const payload = {
+    prenom: $("prenom").value.trim(),
+    nom: $("nom").value.trim(),
+    email: $("email").value.trim(),
+    tel: $("tel").value.trim(),
+    societe: $("societe").value.trim(),
+    type,
+    message: $("message").value.trim()
+  };
+
+  if (type === "rdv") {
+    payload.rdv1 = $("rdv1").value || "";
+    payload.rdv2 = $("rdv2").value || "";
+    payload.motifRdv = $("motifRdv").value || "";
+  } else if (type === "reclamation") {
+    payload.produit = $("produit").value || "";
+    payload.urgence = $("urgence").value || "";
+    payload.ref = $("ref").value.trim();
+    payload.priorite = mapUrgenceToPrio(payload.urgence);
+  }
+
+  try {
+    $("send").disabled = true;
+
+    const res = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-form-key": FORM_KEY
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json().catch(() => null);
+
+    if (!res.ok || !data || !data.ok) {
+      console.log("Worker error:", data);
+      toast("err", "Erreur d’envoi. Réessaie.");
+      return;
+    }
+
+    toast("ok", `Demande envoyée ✅ Ticket #${data.ticket_number}`);
+
+    $("human").checked = false;
+    validateStep3();
+    setStep(1);
+
+    ["prenom","nom","email","tel","societe","message","ref"].forEach(id => { if($(id)) $(id).value = ""; });
+    if ($("rdv1")) $("rdv1").value = "";
+    if ($("rdv2")) $("rdv2").value = "";
+    if ($("motifRdv")) $("motifRdv").value = "";
+    if ($("produit")) $("produit").value = "";
+    if ($("urgence")) $("urgence").value = "";
+    $("count").textContent = `0/800`;
+
+  } catch (e) {
+    console.error(e);
+    toast("err", "Erreur réseau. Vérifie la connexion.");
+  } finally {
+    $("send").disabled = false;
+  }
 });
 
 // ---- Background animation (subtle) ----
