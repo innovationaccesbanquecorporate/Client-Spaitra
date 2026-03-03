@@ -231,22 +231,30 @@ $("send").addEventListener("click", async () => {
   try {
     $("send").disabled = true;
 
-    const res = await fetch(WORKER_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-form-key": FORM_KEY
-      },
-      body: JSON.stringify(payload)
-    });
+const res = await fetch(WORKER_URL, {
+  method: "POST",
+  mode: "cors",
+  headers: {
+    "Content-Type": "application/json",
+    "x-form-key": FORM_KEY
+  },
+  body: JSON.stringify(payload)
+});
 
-    const data = await res.json().catch(() => null);
+const text = await res.text();          // <- lire brut d'abord
+let data = null;
+try { data = text ? JSON.parse(text) : null; } catch {}
 
-    if (!res.ok || !data || !data.ok) {
-      console.log("Worker error:", data);
-      toast("err", "Erreur d’envoi. Réessaie.");
-      return;
-    }
+if (!res.ok) {
+  console.log("HTTP", res.status, text);
+  toast("err", `Erreur d’envoi (HTTP ${res.status}).`);
+  return;
+}
+if (!data || !data.ok) {
+  console.log("Worker payload error:", data);
+  toast("err", "Erreur d’envoi (réponse invalide).");
+  return;
+}
 
     toast("ok", `Demande envoyée ✅ Ticket #${data.ticket_number}`);
 
